@@ -1,1 +1,3 @@
-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
+#!/usr/bin/python3
+def add(a, b):
+    return (a + b)
