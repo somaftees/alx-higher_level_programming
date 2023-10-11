@@ -1,58 +1,70 @@
-#include <python.h>
+#include <Python.h>
 
-void print_hexn(const char *str, int n)
-{
-	int i = 0;
+/**
+ * print_python_list - a function that print some basic
+ * info about Python lists.
+ * @p: PyObject.
+ */
 
-	for (; i < n - 1; ++i)
-		printf("%02x ", (unsigned char) str[i]);
-
-	printf("%02x", str[i]);
-}
-
-void print_python_bytes(PyObject *p)
-{
-	PyBytesObject *clone = (PyBytesObject *) p;
-	int calc_bytes, clone_size = 0;
-
-	printf("[.] bytes object info\n");
-	if (PyBytes_Check(clone))
-	{
-		clone_size = PyBytes_Size(p);
-		calc_bytes = clone_size + 1;
-
-		if (calc_bytes >= 10)
-			calc_bytes = 10;
-
-		printf("  size: %d\n", clone_size);
-		printf("  trying string: %s\n", clone->ob_sval);
-		printf("  first %d bytes: ", calc_bytes);
-		print_hexn(clone->ob_sval, calc_bytes);
-		printf("\n");
-	}
-	else
-	{
-		printf("  [ERROR] Invalid Bytes Object\n");
-	}
-}
+void print_python_list(PyObject *p);
+void print_python_bytes(PyObject *p);
 
 void print_python_list(PyObject *p)
 {
-	int i = 0, list_len = 0;
-	PyObject *item;
-	PyListObject *clone = (PyListObject *) p;
+	int size, i, alloc;
+	PyVarObject *var = (PyVarObject *)p;
+	PyListObject *list = (PyListObject *)p;
+	const char *type;
+
+	size = var->ob_size;
+	alloc = list->allocated;
 
 	printf("[*] Python list info\n");
-	list_len = PyList_GET_SIZE(p);
-	printf("[*] Size of the Python List = %d\n", list_len);
-	printf("[*] Allocated = %d\n", (int) clone->allocated);
+	printf("[*] Size of the Python List = %d\n", size);
+	printf("[*] Allocated = %d\n", alloc);
 
-	for (; i < list_len; ++i)
+	for (i = 0; i < size; i++)
 	{
-		item = PyList_GET_ITEM(p, i);
-		printf("Element %d: %s\n", i, item->ob_type->tp_name);
+		type = list->ob_item[i]->ob_type->tp_name;
+		printf("Element %d: %s\n", i, type);
+		if (strcmp(type, "bytes") == 0)
+			print_python_bytes(list->ob_item[i]);
+	}
+}
 
-		if (PyBytes_Check(item))
-			print_python_bytes(item);
+/**
+ * print_python_bytes - a fucntion that print some basic
+ * info about Python bytes objects.
+ * @p: PyObject.
+ */
+
+void print_python_bytes(PyObject *p)
+{
+	PyBytesObject *bytes = (PyBytesObject *)p;
+	unsigned char size, c;
+
+	printf("[.] bytes object info\n");
+	if (strcmp(p->ob_type->tp_name, "bytes") != 0)
+	{
+		printf("  [ERROR] Invalid Bytes Object\n");
+		return;
+	}
+
+	printf("  size: %ld\n", ((PyVarObject *)p)->ob_size);
+	printf("  trying string: %s\n", bytes->ob_sval);
+
+	if (((PyVarObject *)p)->ob_size > 10)
+		size = 10;
+	else
+		size = ((PyVarObject *)p)->ob_size + 1;
+
+	printf("  first %d bytes: ", size);
+	for (c = 0; c < size; c++)
+	{
+		printf("%02hhx", bytes->ob_sval[c]);
+		if (c == (size - 1))
+			printf("\n");
+		else
+			printf(" ");
 	}
 }
