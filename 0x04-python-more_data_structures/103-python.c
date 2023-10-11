@@ -11,7 +11,7 @@ void print_python_bytes(PyObject *p);
 
 void print_python_list(PyObject *p)
 {
-	int size, i, alloc;
+	int i, size, alloc;
 	PyVarObject *var = (PyVarObject *)p;
 	PyListObject *list = (PyListObject *)p;
 	const char *type;
