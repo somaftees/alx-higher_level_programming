@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <python.h>
 
 void print_hexn(const char *str, int n)
 {
