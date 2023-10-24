@@ -64,4 +64,4 @@ class SinglyLinkedList:
         while tmp is not None:
             arry.append(str(tmp.data))
             tmp = tmp.next_node
-        return('\n'.join(arry))
+        return ('\n'.join(arry))
