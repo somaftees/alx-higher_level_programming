@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """
-class Rectangle
+Class rectangle
+
 """
 
 
 class Rectangle:
-    """Rectangle class"""
+    """ a calss for a rectangle"""
     pass
