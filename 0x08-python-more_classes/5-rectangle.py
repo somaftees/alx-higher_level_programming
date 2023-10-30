@@ -15,7 +15,6 @@ class Rectangle:
         """deleted rectangle"""
         print("Bye rectangle...")
 
-
     @property
     def width(self):
         """width rectangle"""
@@ -61,6 +60,7 @@ class Rectangle:
             string += "\n".join("#" * self.__width
                                 for j in range(self.__height))
         return string
+
     def __repr__(self):
         """reproduction rectangle"""
         return "Rectangle({:d}, {:d})".format(self.__width, self.__height)
