@@ -1,11 +1,7 @@
 #!/usr/bin/python3
-"""
-class
-"""
+"""class"""
 
 
 class Rectangle:
-    """
-    Rectangle
-    """
+    """Rectangle"""
     pass
