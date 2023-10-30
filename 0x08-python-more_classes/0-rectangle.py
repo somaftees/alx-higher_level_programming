@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """
-Rectangle class.
+It is a Rectangle class.
 """
 
 
 class Rectangle:
     """
-    Rectangle class
+    Creating an empty Rectangle Object.
     """
     pass
