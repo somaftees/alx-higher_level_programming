@@ -20,3 +20,8 @@ def text_indentation(text):
                 flag = 0
             else:
                 print(a, end="")
+
+
+if __name__ == "__main__":
+    from doctest import testfile
+    testfile("tests/5-text_indentation.txt")
