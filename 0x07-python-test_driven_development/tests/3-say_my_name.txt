@@ -42,7 +42,7 @@ a TypeError is raised.
 
 ::
 
-    >>> say_my_name("MoNgi", ["Ftees", "Salh", "Gumaa"])
+    >>> say_my_name("TaSnim", ["Salh", "Mongi", "Guma"])
     Traceback (most recent call last):
     TypeError: last_name must be a string
 
