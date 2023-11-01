@@ -48,3 +48,8 @@ def matrix_mul(m_a, m_b):
         new_matrix.append(new_row)
 
     return new_matrix
+
+
+if __name__ == "__main__":
+    from doctest import testfile
+    testfile("tests/100-matrix_mul.txt")
