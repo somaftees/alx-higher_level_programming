@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-reads stdin line by line and computes metrics
-"""
+"""script"""
 import sys
 
 file_size = 0
